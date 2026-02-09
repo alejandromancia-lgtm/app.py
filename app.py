@@ -1,31 +1,18 @@
 import streamlit as st
 from fpdf import FPDF
 
-# Configuración básica
-st.set_page_config(page_title="MboyoValé", page_icon="🇵🇾")
-
 st.title("🇵🇾 MboyoValé")
-st.subheader("Presupuestos rápidos y profesionales")
+st.write("Presupuestos rápidos para profesionales valé.")
 
-# Entradas del usuario
-cliente = st.text_input("Nombre del Cliente")
-detalle = st.text_area("Descripción del trabajo")
-monto = st.number_input("Monto total (Gs.)", min_value=0, step=10000)
+cliente = st.text_input("¿Para quién es?")
+monto = st.number_input("Monto (Gs.)", min_value=0)
 
-if st.button("Generar Presupuesto"):
-    if cliente and detalle and monto:
-        pdf = FPDF()
-        pdf.add_page()
-        pdf.set_font("Arial", "B", 16)
-        pdf.cell(0, 10, "PRESUPUESTO", 0, 1, "C")
-        pdf.ln(10)
-        pdf.set_font("Arial", "", 12)
-        pdf.multi_cell(0, 10, f"Cliente: {cliente}\nDetalle: {detalle}\nTotal: Gs. {monto:,}")
-        
-        pdf_file = "presupuesto.pdf"
-        pdf.output(pdf_file)
-        
-        with open(pdf_file, "rb") as f:
-            st.download_button("📥 Descargar PDF", f, file_name=f"Presu_{cliente}.pdf")
-    else:
-        st.warning("Por favor completa los datos.")
+if st.button("Generar PDF"):
+    pdf = FPDF()
+    pdf.add_page()
+    pdf.set_font("Arial", "B", 16)
+    pdf.cell(0, 10, f"PRESUPUESTO: {cliente}", 0, 1)
+    pdf.cell(0, 10, f"TOTAL: Gs. {monto:,}", 0, 1)
+    pdf.output("presu.pdf")
+    with open("presu.pdf", "rb") as f:
+        st.download_button("📥 Descargar", f, file_name="presupuesto.pdf")
