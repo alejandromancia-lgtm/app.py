@@ -38,7 +38,7 @@ def crear_link_pdf(pdf_obj):
 # 5. GENERACIÓN Y ENVÍO
 if st.button("🚀 Generar y Preparar WhatsApp"):
     if cliente and servicio and precio_unit > 0 and tel_cliente:
-        # Crear PDF en memoria
+        # Crear PDF
         pdf = FPDF()
         pdf.add_page()
         pdf.set_font("Arial", "B", 14)
@@ -53,7 +53,6 @@ if st.button("🚀 Generar y Preparar WhatsApp"):
         pdf.cell(0, 10, f"Fecha: {datetime.now().strftime('%d/%m/%Y')}", 0, 1, "L")
         pdf.cell(0, 10, f"Para: {cliente}", 0, 1)
         
-        # Tabla simple
         pdf.set_fill_color(230, 230, 230)
         pdf.cell(100, 10, " Concepto", 1, 0, "L", True)
         pdf.cell(20, 10, "Cant.", 1, 0, "C", True)
@@ -70,21 +69,15 @@ if st.button("🚀 Generar y Preparar WhatsApp"):
         pdf_output = pdf.output(dest='S').encode('latin-1')
         link_pdf = crear_link_pdf(pdf_output)
 
-        # CREAR MENSAJE PARA WHATSAPP
-        mensaje = f"¡Hola {cliente}! Te saluda {EMPRESA_NOMBRE}. Adjunto el presupuesto por {servicio}. Total: Gs. {total_general:,}. Podes bajar tu PDF acá: {link_pdf}"
+        # MENSAJE WHATSAPP
+        mensaje = f"¡Hola {cliente}! Adjunto presupuesto por {servicio}. Total: Gs. {total_general:,}. Podes bajar tu PDF acá: {link_pdf}"
         mensaje_encoded = urllib.parse.quote(mensaje)
         whatsapp_url = f"https://wa.me/{tel_cliente}?text={mensaje_encoded}"
 
         st.success("¡Presupuesto listo!")
         
-        # BOTONES FINALES
-        st.markdown(f'''
-            <a href="{whatsapp_url}" target="_blank">
-                <button style="background-color: #25D366; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-size: 16px;">
-                    🟢 Enviar por WhatsApp al Cliente
-                </button>
-            </a>
-        ''', unsafe_allow_whitespace=True, unsafe_allow_html=True)
+        # EL BOTÓN CORREGIDO (Sin el error de Syntax)
+        st.markdown(f'<a href="{whatsapp_url}" target="_blank" style="text-decoration: none;"><div style="background-color: #25D366; color: white; padding: 10px; border-radius: 5px; text-align: center; font-weight: bold;">🟢 Enviar por WhatsApp al Cliente</div></a>', unsafe_allow_html=True)
         
         st.download_button("📥 Descargar copia PDF", pdf_output, file_name=f"Presu_{cliente}.pdf")
     else:
