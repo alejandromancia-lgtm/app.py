@@ -10,6 +10,15 @@ EMPRESA_RUC = "80085750-0"
 EMPRESA_TEL = "+595 981 925 071"
 
 st.set_page_config(page_title="MboyoValé", page_icon="🇵🇾")
+col_logo, col_titulo = st.columns([1, 4]) # Crea dos columnas: una pequeña para el logo y otra para el texto
+
+with col_logo:
+    # Cambiá "logo_agm.png" por el nombre exacto del archivo que subiste
+    st.image("logo_agm.png", width=100) 
+
+with col_titulo:
+    st.title("🇵🇾 MboyoValé")
+    st.write(f"Gestión de Ventas para **{MI_EMPRESA}**")
 
 st.title("🇵🇾 MboyoValé")
 st.write(f"Gestión de Ventas para **{EMPRESA_NOMBRE}**")
