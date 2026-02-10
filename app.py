@@ -5,9 +5,9 @@ import base64
 import urllib.parse
 
 # 1. CONFIGURACIÓN DE TU EMPRESA
-EMPRESA_NOMBRE = "AGM SOLUCIONES"
-EMPRESA_RUC = "80012345-6"
-EMPRESA_TEL = "+595 981 123 456"
+EMPRESA_NOMBRE = "AGM SRL"
+EMPRESA_RUC = "80085750-0"
+EMPRESA_TEL = "+595 981 925 071"
 
 st.set_page_config(page_title="MboyoValé", page_icon="🇵🇾")
 
