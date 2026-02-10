@@ -1,8 +1,8 @@
 import streamlit as st
 from fpdf import FPDF
 
-st.title("🇵🇾 MboyoValé")st.image(""
-, width=200)
+st.title("🇵🇾 MboyoValé")
+st.image("http://googleusercontent.com/image_collection/image_retrieval/8861008225319494113_0", width=200)
 st.write("Presupuestos rápidos para profesionales valé.")
 
 cliente = st.text_input("¿Para quién es?")
