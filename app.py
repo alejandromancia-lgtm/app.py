@@ -1,7 +1,8 @@
 import streamlit as st
 from fpdf import FPDF
 
-st.title("🇵🇾 MboyoValé")
+st.title("🇵🇾 MboyoValé")st.image(""
+, width=200)
 st.write("Presupuestos rápidos para profesionales valé.")
 
 cliente = st.text_input("¿Para quién es?")
